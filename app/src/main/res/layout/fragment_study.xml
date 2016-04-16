@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     tools:context="example.ken.ptitroyaldemo.StudyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvStudyPost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="study" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
