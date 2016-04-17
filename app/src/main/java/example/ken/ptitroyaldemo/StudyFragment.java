@@ -58,6 +58,10 @@ public class StudyFragment extends Fragment {
 
         list.add(new Post("Ken", "15:54-16/04/2016", "This is a test", "", 5, 14));
         list.add(new Post("Ken", "15:54-16/04/2016", "This is a test 2", "", 5, 14));
+        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test", "", 5, 14));
+        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test 2", "", 5, 14));
+        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test", "", 5, 14));
+        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test 2", "", 5, 14));
 
         return list;
     }
