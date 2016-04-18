@@ -52,7 +52,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         if (replyTo == null || replyTo.equals("")) {
             holder.tvReplyTo.setVisibility(View.GONE);
         } else {
-            holder.tvReplyTo.setText(replyTo);
+            holder.tvReplyTo.setText("Trả lời: " + replyTo);
             holder.tvReplyTo.setVisibility(View.VISIBLE);
         }
         holder.tvCommentContent.setText(comment.getContent());

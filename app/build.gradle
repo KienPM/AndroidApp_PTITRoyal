@@ -35,4 +35,6 @@ dependencies {
     compile 'com.github.orangegangsters:swipy:1.2.2@aar'
     // Image loader
     compile 'com.squareup.picasso:picasso:2.5.2'
+    // Layout manager
+    compile 'org.solovyev.android.views:linear-layout-manager:0.5@aar'
 }

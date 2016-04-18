@@ -7,12 +7,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.solovyev.android.views.llm.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +52,13 @@ public class PostDetailActivity extends AppCompatActivity {
         imgLike = (ImageView) findViewById(R.id.imgLike);
 
         rvComments = (RecyclerView) findViewById(R.id.rvComments);
+        rvComments.setNestedScrollingEnabled(false);
         adapter = new CommentsAdapter(this, comments);
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rvComments.setLayoutManager(layoutManager);
+        final LinearLayoutManager mLayoutManager =
+                new org.solovyev.android.views.llm.LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvComments.setLayoutManager(mLayoutManager);
         rvComments.setItemAnimator(new DefaultItemAnimator());
+        rvComments.addItemDecoration(new DividerItemDecoration(this, null));
         rvComments.setAdapter(adapter);
     }
 
@@ -86,6 +89,8 @@ public class PostDetailActivity extends AppCompatActivity {
                 onClickLike();
             }
         });
+
+        rvComments.getLayoutParams().height = comments.size() * 500;
     }
 
     public void onClickBack(View v) {
