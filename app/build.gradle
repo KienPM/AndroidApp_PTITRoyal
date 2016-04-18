@@ -24,9 +24,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/android-viewbadger.jar')
     compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:cardview-v7:23.3.0'
+
+    // For tabs
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+    // For refreshing layout
+    compile 'com.github.orangegangsters:swipy:1.2.2@aar'
+    // Image loader
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

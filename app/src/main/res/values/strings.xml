@@ -3,4 +3,5 @@
 
     <string name="like">Thích</string>
     <string name="comment">Bình luận</string>
+    <string name="reply">Trả lời: </string>
 </resources>

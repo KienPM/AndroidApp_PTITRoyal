@@ -10,6 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,7 @@ public class StudyFragment extends Fragment {
     private RecyclerView rvStudyPosts;
     private PostsAdapter adapter;
     private View rootView;
+    private SwipyRefreshLayout swipyRefreshStudy;
 
     public StudyFragment() {
         // Required empty public constructor
@@ -37,32 +42,54 @@ public class StudyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_study, container, false);
-        posts = fakeData();
         rvStudyPosts = (RecyclerView) rootView.findViewById(R.id.rvStudyPost);
-        adapter = new PostsAdapter(posts);
+        adapter = new PostsAdapter(getActivity(), posts);
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rvStudyPosts.setLayoutManager(layoutManager);
         rvStudyPosts.setItemAnimator(new DefaultItemAnimator());
         rvStudyPosts.setAdapter(adapter);
+
+        swipyRefreshStudy = (SwipyRefreshLayout) rootView.findViewById(R.id.swipyRefreshStudy);
+        swipyRefreshStudy.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                if (direction == SwipyRefreshLayoutDirection.TOP) {
+                    refresh();
+                } else {
+                    loadMore();
+                }
+                swipyRefreshStudy.setRefreshing(false);
+            }
+        });
+
         return rootView;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        posts = fakeData();
     }
 
     private List<Post> fakeData() {
+        int i = 1;
         List<Post> list = new ArrayList<>();
 
-        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test", "", 5, 14));
-        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test 2", "", 5, 14));
-        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test", "", 5, 14));
-        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test 2", "", 5, 14));
-        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test", "", 5, 14));
-        list.add(new Post("Ken", "15:54-16/04/2016", "This is a test 2", "", 5, 14));
+        list.add(new Post(i, "Ken", "15:54-16/04/2016", "This is a test " + i++, "https://apa340.files.wordpress.com/2013/04/anonymous.jpg", 5, 14));
+        list.add(new Post(i, "Ken", "15:54-16/04/2016", "This is a test " + i++, "http://i1274.photobucket.com/albums/y436/Jillwellington/edit27of116_zps85bbba76.jpg", 5, 14));
+        list.add(new Post(i, "Ken", "15:54-16/04/2016", "This is a test " + i++, "", 5, 14));
 
         return list;
+    }
+
+    private void refresh() {
+        Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
+        posts.addAll(fakeData());
+        adapter.notifyDataSetChanged();
+    }
+
+    private void loadMore() {
+        Toast.makeText(getActivity(), "Load more", Toast.LENGTH_SHORT).show();
     }
 }
