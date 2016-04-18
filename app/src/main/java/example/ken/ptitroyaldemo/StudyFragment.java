@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.ken.ptitroyaldemo.model.Post;
+import example.ken.ptitroyaldemo.model.User;
 
 
 /**
@@ -75,10 +76,10 @@ public class StudyFragment extends Fragment {
     private List<Post> fakeData() {
         int i = 1;
         List<Post> list = new ArrayList<>();
-
-        list.add(new Post(i, "Ken", "15:54-16/04/2016", "This is a test " + i++, "https://apa340.files.wordpress.com/2013/04/anonymous.jpg", 5, 14));
-        list.add(new Post(i, "Ken", "15:54-16/04/2016", "This is a test " + i++, "http://i1274.photobucket.com/albums/y436/Jillwellington/edit27of116_zps85bbba76.jpg", 5, 14));
-        list.add(new Post(i, "Ken", "15:54-16/04/2016", "This is a test " + i++, "", 5, 14));
+        User user2 = new User("2", "Ken", "https://pbs.twimg.com/media/CYHZY4IWsAA4xSD.jpg", "");
+        list.add(new Post(String.valueOf(i), MainActivity.user, "1 giờ trước", "This is a test " + i++, "https://apa340.files.wordpress.com/2013/04/anonymous.jpg", 5, 14, false));
+        list.add(new Post(String.valueOf(i), user2, "2 giờ trước", "This is a test " + i++, "http://i1274.photobucket.com/albums/y436/Jillwellington/edit27of116_zps85bbba76.jpg", 5, 14, true));
+        list.add(new Post(String.valueOf(i), MainActivity.user, "3 giờ trước", "This is a test " + i++, "", 5, 14, false));
 
         return list;
     }

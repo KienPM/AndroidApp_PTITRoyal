@@ -24,6 +24,7 @@
                 android:layout_height="@dimen/post_avatar"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/space_small"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher" />
 
@@ -33,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="@dimen/space_medium"
+                android:layout_marginTop="@dimen/space_small"
                 android:layout_toEndOf="@+id/imgAvatar"
                 android:text="Name"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
@@ -46,7 +48,7 @@
                 android:layout_marginLeft="@dimen/space_medium"
                 android:layout_toEndOf="@+id/imgAvatar"
                 android:text="Time"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorSecondaryText" />
 
         </RelativeLayout>
@@ -56,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/colorPrimaryText" />
 
         <ImageView
@@ -85,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space_small"
                 android:text="5"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
@@ -93,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space_small"
                 android:text="@string/like"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorSecondaryText" />
 
             <ImageView
@@ -109,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space_small"
                 android:text="5"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
@@ -117,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space_small"
                 android:text="@string/comment"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorSecondaryText" />
         </LinearLayout>
 

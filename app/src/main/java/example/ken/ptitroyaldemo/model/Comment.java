@@ -7,47 +7,56 @@ import java.util.List;
  * Created by Ken on 17/04/2016.
  */
 public class Comment implements Serializable {
-    private int id;
-    private String username;
-    private String replyTo;
+    private String id;
+    private User owner;
+    private User replyTo;
     private String time;
     private String content;
-    private List<String> mentioned;
+    private List<User> mentioned;
 
     public Comment() {
     }
 
-    public Comment(int id, String username, String replyTo, String time, String content) {
+    public Comment(String id, User owner, User replyTo, String time, String content, List<User> mentioned) {
         this.id = id;
-        this.username = username;
-        this.replyTo = replyTo;
-        this.time = time;
-        this.content = content;
-    }
-
-    public Comment(int id, String username, String replyTo, String time, String content, List<String> mentioned) {
-        this.id = id;
-        this.username = username;
+        this.owner = owner;
         this.replyTo = replyTo;
         this.time = time;
         this.content = content;
         this.mentioned = mentioned;
     }
 
-    public int getId() {
+    public Comment(String id, User owner, User replyTo, String time, String content) {
+
+        this.id = id;
+        this.owner = owner;
+        this.replyTo = replyTo;
+        this.time = time;
+        this.content = content;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public User getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(User replyTo) {
+        this.replyTo = replyTo;
     }
 
     public String getTime() {
@@ -66,19 +75,11 @@ public class Comment implements Serializable {
         this.content = content;
     }
 
-    public List<String> getMentioned() {
+    public List<User> getMentioned() {
         return mentioned;
     }
 
-    public void setMentioned(List<String> mentioned) {
+    public void setMentioned(List<User> mentioned) {
         this.mentioned = mentioned;
-    }
-
-    public String getReplyTo() {
-        return replyTo;
-    }
-
-    public void setReplyTo(String replyTo) {
-        this.replyTo = replyTo;
     }
 }

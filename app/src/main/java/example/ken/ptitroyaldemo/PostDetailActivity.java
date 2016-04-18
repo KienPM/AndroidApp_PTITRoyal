@@ -20,14 +20,16 @@ import java.util.List;
 
 import example.ken.ptitroyaldemo.model.Comment;
 import example.ken.ptitroyaldemo.model.Post;
+import example.ken.ptitroyaldemo.model.User;
 
 public class PostDetailActivity extends AppCompatActivity {
 
+    private User user;
     private Post post;
     private List<Comment> comments;
 
     private TextView tvUsername, tvTimePost, tvContent, tvNumOfLikes, tvNumOfCmts;
-    private ImageView imgContent, imgLike;
+    private ImageView imgAvatar, imgContent, imgLike;
     private RecyclerView rvComments;
     private CommentsAdapter adapter;
 
@@ -37,12 +39,14 @@ public class PostDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_detail);
 
         Intent intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
         post = (Post) intent.getSerializableExtra("post");
         comments = fakeData();
         initComponents();
     }
 
     private void initComponents() {
+        imgAvatar = (ImageView) findViewById(R.id.imgAvatar);
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         tvTimePost = (TextView) findViewById(R.id.tvTimePost);
         tvContent = (TextView) findViewById(R.id.tvContent);
@@ -65,7 +69,13 @@ public class PostDetailActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        tvUsername.setText(post.getUsername());
+
+        Picasso.with(this)
+                .load(post.getOwner().getAvatarURI())
+                .placeholder(R.mipmap.ic_avatar)
+                .error(R.mipmap.ic_avatar)
+                .into(imgAvatar);
+        tvUsername.setText(post.getOwner().getUsername());
         tvTimePost.setText(post.getTime());
         tvContent.setText(post.getContent());
         String imageURI = post.getImageURI();
@@ -106,11 +116,11 @@ public class PostDetailActivity extends AppCompatActivity {
 
     public List<Comment> fakeData() {
         List<Comment> list = new ArrayList<>();
-
+        User user2 = new User("2", "Ken", "https://pbs.twimg.com/media/CYHZY4IWsAA4xSD.jpg", "");
         int i = 0;
-        list.add(new Comment(1, "KienPM", "Ken", "16:48-18/04/2016", "This is comment " + i++));
-        list.add(new Comment(1, "KienPM", "", "16:48-18/04/2016", "This is comment " + i++));
-        list.add(new Comment(1, "KienPM", "", "16:48-18/04/2016", "This is comment " + i++));
+        list.add(new Comment("1", user2, null, "3 phút trước", "This is comment " + i++));
+        list.add(new Comment("2", user, user2, "2 phút trước", "This is comment " + i++));
+        list.add(new Comment("3", user, null, "2 phút trước", "This is comment " + i++));
 
         return list;
     }

@@ -27,10 +27,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     public class PostViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvUsername, tvTimePost, tvContent, tvNumOfLikes, tvNumOfCmts;
-        public ImageView imgContent, imgLike, imgComment;
+        public ImageView imgAvatar, imgContent, imgLike, imgComment;
 
         public PostViewHolder(View v) {
             super(v);
+            imgAvatar = (ImageView) v.findViewById(R.id.imgAvatar);
             tvUsername = (TextView) v.findViewById(R.id.tvUsername);
             tvTimePost = (TextView) v.findViewById(R.id.tvTimePost);
             tvContent = (TextView) v.findViewById(R.id.tvContent);
@@ -60,7 +61,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     @Override
     public void onBindViewHolder(final PostViewHolder holder, final int position) {
         Post post = postList.get(position);
-        holder.tvUsername.setText(post.getUsername());
+        Picasso.with(context)
+                .load(post.getOwner().getAvatarURI())
+                .placeholder(R.mipmap.ic_avatar)
+                .error(R.mipmap.ic_avatar)
+                .into(holder.imgAvatar);
+        holder.tvUsername.setText(post.getOwner().getUsername());
         holder.tvTimePost.setText(post.getTime());
         holder.tvContent.setText(post.getContent());
         String imageURI = post.getImageURI();
@@ -104,6 +110,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
 
     private void onClickComment(int position) {
         Intent intent = new Intent(context, PostDetailActivity.class);
+        intent.putExtra("user", MainActivity.user);
         intent.putExtra("post", postList.get(position));
         context.startActivity(intent);
     }

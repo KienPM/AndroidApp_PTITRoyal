@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import com.astuetz.PagerSlidingTabStrip;
 import com.readystatesoftware.viewbadger.BadgeView;
 
+import example.ken.ptitroyaldemo.model.User;
+
 public class MainActivity extends AppCompatActivity {
 
     private PagerSlidingTabStrip tabs;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private GastronomyFragment gastronomyFragment;
 
     private BadgeView bvNotification;
+
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
+
+        user = new User("1", "KienPM", "http://file.vforum.vn/hinh/2016/01/1(96).jpg", "");
 
         initComoponent();
     }

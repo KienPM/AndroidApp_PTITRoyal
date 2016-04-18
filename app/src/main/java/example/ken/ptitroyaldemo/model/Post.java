@@ -6,33 +6,43 @@ import java.io.Serializable;
  * Created by Ken on 16/04/2016.
  */
 public class Post implements Serializable {
-    private int id;
-    private String username;
+    private String id;
+    private User owner;
     private String time;
     private String content;
     private String imageURI;
     private int numberOfLikes;
     private int numberOfComments;
+    private boolean isLiked;
 
     public Post() {
     }
 
-    public Post(int id, String username, String time, String content, String imageURI, int numberOfLikes, int numberOfComments) {
+    public Post(String id, User owner, String time, String content, String imageURI, int numberOfLikes, int numberOfComments, boolean isLiked) {
         this.id = id;
-        this.username = username;
+        this.owner = owner;
         this.time = time;
         this.content = content;
         this.imageURI = imageURI;
         this.numberOfLikes = numberOfLikes;
         this.numberOfComments = numberOfComments;
+        this.isLiked = isLiked;
     }
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getTime() {
@@ -73,6 +83,14 @@ public class Post implements Serializable {
 
     public void setNumberOfComments(int numberOfComments) {
         this.numberOfComments = numberOfComments;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 
     public void incLike() {

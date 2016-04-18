@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import example.ken.ptitroyaldemo.model.Comment;
+import example.ken.ptitroyaldemo.model.User;
 
 /**
  * Created by Ken on 18/04/2016.
@@ -47,12 +50,17 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     @Override
     public void onBindViewHolder(CommentViewHolder holder, int position) {
         Comment comment = commentList.get(position);
-        holder.tvCommentUsername.setText(comment.getUsername());
-        String replyTo = comment.getReplyTo();
-        if (replyTo == null || replyTo.equals("")) {
+        Picasso.with(context)
+                .load(comment.getOwner().getAvatarURI())
+                .placeholder(R.mipmap.ic_avatar)
+                .error(R.mipmap.ic_avatar)
+                .into(holder.imgCommentAvatar);
+        holder.tvCommentUsername.setText(comment.getOwner().getUsername());
+        User replyTo = comment.getReplyTo();
+        if (replyTo == null) {
             holder.tvReplyTo.setVisibility(View.GONE);
         } else {
-            holder.tvReplyTo.setText("Trả lời: " + replyTo);
+            holder.tvReplyTo.setText("Trả lời: " + replyTo.getUsername());
             holder.tvReplyTo.setVisibility(View.VISIBLE);
         }
         holder.tvCommentContent.setText(comment.getContent());
