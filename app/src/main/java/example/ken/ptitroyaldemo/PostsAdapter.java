@@ -83,10 +83,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             holder.imgContent.setVisibility(View.GONE);
         }
 
+        if (post.isLiked()) {
+            holder.imgLike.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_like));
+        } else {
+            holder.imgLike.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_like_inactive));
+        }
+
         holder.imgLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickLike(position, holder);
+                onClickLike(postList.get(position), holder);
             }
         });
 
@@ -103,9 +109,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         return postList.size();
     }
 
-    private void onClickLike(int position, PostViewHolder holder) {
-        postList.get(position).incLike();
-        holder.tvNumOfLikes.setText(String.valueOf(postList.get(position).getNumberOfLikes()));
+    private void onClickLike(Post post, PostViewHolder holder) {
+        if (post.isLiked()) {
+            post.decLike();
+            holder.imgLike.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_like_inactive));
+        } else {
+            post.incLike();
+            holder.imgLike.setImageDrawable(context.getResources().getDrawable(R.mipmap.ic_like));
+        }
+        post.setLiked(!post.isLiked());
+        holder.tvNumOfLikes.setText(String.valueOf(post.getNumberOfLikes()));
     }
 
     private void onClickComment(int position) {

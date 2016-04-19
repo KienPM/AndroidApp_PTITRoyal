@@ -43,7 +43,7 @@ public class StudyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_study, container, false);
-        rvStudyPosts = (RecyclerView) rootView.findViewById(R.id.rvStudyPost);
+        rvStudyPosts = (RecyclerView) rootView.findViewById(R.id.rvStudyPosts);
         adapter = new PostsAdapter(getActivity(), posts);
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

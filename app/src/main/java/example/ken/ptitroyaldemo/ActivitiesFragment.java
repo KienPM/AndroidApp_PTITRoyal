@@ -2,13 +2,24 @@ package example.ken.ptitroyaldemo;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import example.ken.ptitroyaldemo.model.Post;
+import example.ken.ptitroyaldemo.model.User;
 
 
 /**
@@ -16,6 +27,11 @@ import com.squareup.picasso.Picasso;
  */
 public class ActivitiesFragment extends Fragment {
 
+    private List<Post> posts;
+    private RecyclerView rvActivitiesPosts;
+    private PostsAdapter adapter;
+    private View rootView;
+    private SwipyRefreshLayout swipyRefreshActivities;
 
     public ActivitiesFragment() {
         // Required empty public constructor
@@ -27,9 +43,56 @@ public class ActivitiesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_activities, container, false);
-        ImageView imageView = (ImageView) v.findViewById(R.id.imgTest);
-        Picasso.with(getActivity()).load("http://i.imgur.com/DvpvklR.png").into(imageView);
-        return v;
+        rootView = inflater.inflate(R.layout.fragment_activities, container, false);
+        rvActivitiesPosts = (RecyclerView) rootView.findViewById(R.id.rvActivitiesPosts);
+        adapter = new PostsAdapter(getActivity(), posts);
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rvActivitiesPosts.setLayoutManager(layoutManager);
+        rvActivitiesPosts.setItemAnimator(new DefaultItemAnimator());
+        rvActivitiesPosts.setAdapter(adapter);
+
+        swipyRefreshActivities = (SwipyRefreshLayout) rootView.findViewById(R.id.swipyRefreshActivities);
+        swipyRefreshActivities.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(SwipyRefreshLayoutDirection direction) {
+                if (direction == SwipyRefreshLayoutDirection.TOP) {
+                    refresh();
+                } else {
+                    loadMore();
+                }
+                swipyRefreshActivities.setRefreshing(false);
+            }
+        });
+
+        return rootView;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        posts = fakeData();
+    }
+
+    private List<Post> fakeData() {
+        int i = 1;
+        List<Post> list = new ArrayList<>();
+        User user2 = new User("2", "Ken", "https://pbs.twimg.com/media/CYHZY4IWsAA4xSD.jpg", "");
+        list.add(new Post(String.valueOf(i), MainActivity.user, "1 giờ trước", "This is a test " + i++, "https://apa340.files.wordpress.com/2013/04/anonymous.jpg", 5, 14, false));
+        list.add(new Post(String.valueOf(i), user2, "2 giờ trước", "This is a test " + i++, "http://i1274.photobucket.com/albums/y436/Jillwellington/edit27of116_zps85bbba76.jpg", 5, 14, true));
+        list.add(new Post(String.valueOf(i), MainActivity.user, "3 giờ trước", "This is a test " + i++, "", 5, 14, false));
+
+        return list;
+    }
+
+    private void refresh() {
+        Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
+        posts.addAll(fakeData());
+        adapter.notifyDataSetChanged();
+    }
+
+    private void loadMore() {
+        Toast.makeText(getActivity(), "Load more", Toast.LENGTH_SHORT).show();
     }
 
 }

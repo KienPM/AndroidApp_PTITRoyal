@@ -96,4 +96,8 @@ public class Post implements Serializable {
     public void incLike() {
         ++this.numberOfLikes;
     }
+
+    public void decLike() {
+        --this.numberOfLikes;
+    }
 }

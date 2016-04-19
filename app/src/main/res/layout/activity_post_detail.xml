@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:padding="@dimen/space_small">
 
             <include
                 layout="@layout/item_post_list"
@@ -42,7 +42,6 @@
                 android:id="@+id/rvComments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/space_small"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
@@ -50,6 +49,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/space_small">
 

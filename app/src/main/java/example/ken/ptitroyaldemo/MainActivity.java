@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -56,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
         bvNotification.show();
     }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
+    public class MyPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.CustomTabProvider {
 
         private final String[] TITLES = {"Học tập", "Vui chơi", "Ăn uống"};
+        private final int[] ICONS = {R.mipmap.ic_study, R.mipmap.ic_activities, R.mipmap.ic_gastronomy};
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -84,6 +87,24 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     return studyFragment;
             }
+        }
+
+        @Override
+        public View getCustomTabView(ViewGroup parent, int position) {
+            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_tab, null);
+            ImageView imgIcon = (ImageView) v.findViewById(R.id.imgIcon);
+            imgIcon.setImageDrawable(getResources().getDrawable(ICONS[position]));
+            return v;
+        }
+
+        @Override
+        public void tabSelected(View tab) {
+            tab.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+
+        @Override
+        public void tabUnselected(View tab) {
+            tab.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
     }
 }

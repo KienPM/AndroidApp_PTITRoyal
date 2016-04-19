@@ -93,6 +93,12 @@ public class PostDetailActivity extends AppCompatActivity {
         } else {
             imgContent.setVisibility(View.GONE);
         }
+
+        if (post.isLiked()) {
+            imgLike.setImageDrawable(getResources().getDrawable(R.mipmap.ic_like));
+        } else {
+            imgLike.setImageDrawable(getResources().getDrawable(R.mipmap.ic_like_inactive));
+        }
         imgLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +116,14 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
     private void onClickLike() {
-        post.incLike();
+        if (post.isLiked()) {
+            post.decLike();
+            imgLike.setImageDrawable(getResources().getDrawable(R.mipmap.ic_like_inactive));
+        } else {
+            post.incLike();
+            imgLike.setImageDrawable(getResources().getDrawable(R.mipmap.ic_like));
+        }
+        post.setLiked(!post.isLiked());
         tvNumOfLikes.setText(String.valueOf(post.getNumberOfLikes()));
     }
 

@@ -6,6 +6,7 @@
     <dimen name="comment_avatar">32dp</dimen>
     <dimen name="post_image">150dp</dimen>
     <dimen name="button_icon">23dp</dimen>
+    <dimen name="tab_icon">32dp</dimen>
     <dimen name="space_small">5dp</dimen>
     <dimen name="space_medium">10dp</dimen>
     <dimen name="space_large">30dp</dimen>
